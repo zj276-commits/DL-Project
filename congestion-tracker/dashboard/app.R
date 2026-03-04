@@ -7,9 +7,8 @@ library(ggplot2)
 library(leaflet)
 library(jsonlite)
 
-API_BASE     <- Sys.getenv("API_BASE", "http://localhost:8000")
-OLLAMA_URL   <- Sys.getenv("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL <- Sys.getenv("OLLAMA_MODEL", "gemma3")
+API_BASE       <- Sys.getenv("API_BASE", "http://localhost:8000")
+OPENAI_API_KEY <- Sys.getenv("OPENAI_API_KEY")
 
 api_alive <- tryCatch(
   { request(paste0(API_BASE, "/locations")) |> req_perform(); TRUE },
@@ -58,17 +57,20 @@ get_ai_summary <- function(data_text) {
     "DATA:\n", data_text
   )
 
-  resp <- request(paste0(OLLAMA_URL, "/api/chat")) |>
-    req_headers("Content-Type" = "application/json") |>
+  resp <- request("https://api.openai.com/v1/chat/completions") |>
+    req_headers(
+      "Content-Type"  = "application/json",
+      "Authorization" = paste("Bearer", OPENAI_API_KEY)
+    ) |>
     req_body_json(list(
-      model    = OLLAMA_MODEL,
+      model    = "gpt-4o-mini",
       messages = list(list(role = "user", content = prompt)),
-      stream   = FALSE
+      max_tokens = 300
     )) |>
-    req_timeout(120) |>
+    req_timeout(60) |>
     req_perform()
 
-  resp_body_json(resp)$message$content
+  resp_body_json(resp)$choices[[1]]$message$content
 }
 
 ui <- page_sidebar(

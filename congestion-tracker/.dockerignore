@@ -1,0 +1,7 @@
+.env
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+.git
+.Rapp.history
