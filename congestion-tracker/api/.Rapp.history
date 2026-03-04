@@ -1,0 +1,4 @@
+readRenviron("~/DL-Project/congestion-tracker/.env")#
+plumber::pr_run(plumber::pr("~/DL-Project/congestion-tracker/api/plumber.R"), port = 8000)
+readRenviron("~/DL-Project/congestion-tracker/.env")#
+plumber::pr_run(plumber::pr("~/DL-Project/congestion-tracker/api/plumber.R"), port = 8000)

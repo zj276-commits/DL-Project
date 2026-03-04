@@ -1,0 +1,11 @@
+"location_id","name","zone","lat","lng"
+"LOC1","Main St & 1st Ave","Downtown",40.7914806043496,-73.9742258223752
+"LOC2","Broadway & 5th","Downtown",40.7937075413298,-73.9480887748348
+"LOC3","Harbor Tunnel","Downtown",40.7286139534786,-73.9265327752847
+"LOC4","Elm Rd & Park Blvd","Downtown",40.7830447626067,-73.9944571175659
+"LOC5","Central Bridge","Midtown",40.7641745518893,-73.9737707177457
+"LOC6","Airport Connector","Midtown",40.751909594913,-73.9259985477244
+"LOC7","Riverside Dr","Midtown",40.7736588314641,-73.9221773571614
+"LOC8","Downtown Loop","Outskirts",40.7134666597238,-74.0082512638345
+"LOC9","West Gate Rd","Outskirts",40.7656992290402,-73.9725002918439
+"LOC10","South Bypass","Outskirts",40.7705064784037,-73.9639667253755

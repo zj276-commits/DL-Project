@@ -1,0 +1,9 @@
+install.packages(c("dplyr", "lubridate", "httr2", "jsonlite"))
+install.packages(c("dplyr", "lubridate", "httr2", "jsonlite"))
+setwd("~/DL-Project/congestion-tracker/data")#
+source("generate_data.R")
+readRenviron("~/DL-Project/congestion-tracker/.env")#
+plumber::pr_run(plumber::pr("~/DL-Project/congestion-tracker/api/plumber.R"), port = 8000)
+install.packages("plumber")
+install.packages("plumber")#
+quit()
