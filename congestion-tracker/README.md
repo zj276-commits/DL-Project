@@ -1,5 +1,7 @@
 # City Congestion Tracker
 
+**Live Demo:** https://dl-l7al8.ondigitalocean.app/
+
 A full-stack congestion-tracking system that stores traffic data in Supabase, exposes it through a REST API, visualizes it in a Shiny dashboard, and generates AI-powered insights via OpenAI.
 
 ## Architecture
