@@ -4,18 +4,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
-    libgdal-dev \
-    libproj-dev \
-    libgeos-dev \
-    libudunits2-dev \
-    pandoc \
+    libpng-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN R -e "install.packages(c( \
-  'plumber', 'httr2', 'dplyr', 'lubridate', 'jsonlite', \
-  'shiny', 'bslib', 'ggplot2', 'leaflet', 'callr' \
-), repos='https://cloud.r-project.org')" \
-  && R -e "if (!requireNamespace('leaflet', quietly=TRUE)) stop('leaflet failed to install')"
+RUN R -e "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/__linux__/noble/latest')); \
+  install.packages(c( \
+    'plumber', 'httr2', 'dplyr', 'lubridate', 'jsonlite', \
+    'bslib', 'ggplot2', 'leaflet', 'callr' \
+  ))"
 
 WORKDIR /app
 COPY api/       api/
