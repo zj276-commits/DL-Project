@@ -125,3 +125,46 @@ The dashboard includes an **AI Summary** button that sends aggregated congestion
 - **Recommendation** — areas/times to avoid
 
 The prompt is constrained to use only the provided data, preventing hallucination.
+
+## Test Demonstration Examples
+
+### Example 1: Query all monitoring locations via API
+
+```bash
+curl https://dl-l7al8.ondigitalocean.app/locations
+```
+
+Expected response: JSON array of 10 locations with `location_id`, `name`, `zone`, `lat`, `lng`.
+
+### Example 2: Get top 3 most congested locations
+
+```bash
+curl "https://dl-l7al8.ondigitalocean.app/congestion/top?n=3"
+```
+
+Expected response: JSON array of 3 locations sorted by `congestion_level` descending (values between 8–10 during peak hours).
+
+### Example 3: Filter congestion by location
+
+```bash
+curl "https://dl-l7al8.ondigitalocean.app/congestion?location_id=LOC1"
+```
+
+Expected response: Up to 500 readings for Main St & 1st Ave, sorted by timestamp descending.
+
+### Example 4: Get hourly congestion pattern
+
+```bash
+curl https://dl-l7al8.ondigitalocean.app/congestion/hourly-pattern
+```
+
+Expected response: JSON array with 24 entries (hours 0–23), each with `avg_congestion`. Peak values (~7–8) at hours 7–9 and 17–19.
+
+### Example 5: Dashboard walkthrough
+
+1. Open https://dl-l7al8.ondigitalocean.app/
+2. The **Congestion Map** shows 10 color-coded markers (red = high, green = low congestion)
+3. The **Top Congested Now** table lists the 5 worst locations
+4. Select a specific location from the dropdown → the **Hourly Pattern** chart updates to show that location's pattern
+5. Change the **Date Range** → chart updates for the selected period
+6. Click **AI Summary** → OpenAI generates a structured traffic insight based on the currently filtered data
