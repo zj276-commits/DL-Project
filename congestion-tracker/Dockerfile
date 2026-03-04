@@ -1,4 +1,4 @@
-FROM rocker/shiny:4.4.0
+FROM rocker/shiny:latest
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
@@ -17,9 +17,8 @@ COPY dashboard/ dashboard/
 COPY data/locations.csv  data/locations.csv
 COPY data/readings.csv   data/readings.csv
 COPY db/        db/
+COPY start.R    start.R
 
-COPY start.R start.R
-
-EXPOSE 8000 3838
+EXPOSE 3838
 
 CMD ["Rscript", "start.R"]
