@@ -79,7 +79,7 @@ ui <- page_sidebar(
   sidebar = sidebar(
     selectInput("location", "Filter by Location", choices = c("All Locations")),
     dateRangeInput("daterange", "Date Range",
-                   start = Sys.Date() - 7, end = Sys.Date()),
+                   start = Sys.Date() - 30, end = Sys.Date()),
     hr(),
     actionButton("summarize", "AI Summary", class = "btn-success w-100")
   ),
@@ -102,6 +102,14 @@ server <- function(input, output, session) {
     locs <- api_get("/locations")
     choices <- c("All Locations", setNames(locs$location_id, locs$name))
     updateSelectInput(session, "location", choices = choices)
+
+    readings <- api_get("/congestion")
+    if (nrow(readings) > 0) {
+      dates <- as.Date(readings$timestamp)
+      updateDateRangeInput(session, "daterange",
+                           start = min(dates, na.rm = TRUE),
+                           end   = max(dates, na.rm = TRUE))
+    }
   })
 
   filtered_data <- reactive({
